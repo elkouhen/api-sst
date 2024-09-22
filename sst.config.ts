@@ -11,10 +11,18 @@ export default $config({
   },
   async run() {
 
+    // site web
     const bucket = new sst.aws.Bucket("MyBucket", {
       public: false,
     });
 
+    new sst.aws.Nuxt("MyWeb", {
+      link: [bucket],
+      path: "packages/gui"
+    });
+
+
+    // table dynamodb pour le stockage des livres
     const table = new sst.aws.Dynamo("MyTable", {
       fields: {
         author: "string",
@@ -26,8 +34,8 @@ export default $config({
         IdIndex: { hashKey: "id" }
       }
     });
-
-    bucket.subscribe("src/js/index.books_import");
+    
+    bucket.subscribe("packages/js/index.books_import");
 
     const userPool = new sst.aws.CognitoUserPool("My", {
       usernames: ["email"]
@@ -98,9 +106,5 @@ export default $config({
       link: [table, ...allSecrets]
     });
 
-    new sst.aws.StaticSite("MyWebsite", {
-      domain: "books.elkouhen.fyi",
-      path: "packages/html"
-    });
   },
 });

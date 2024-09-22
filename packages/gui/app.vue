@@ -1,6 +1,13 @@
+<script setup lang="ts">
+async function addTodo() {
+  const books = await $fetch('/books', {
+    method: 'GET'
+  })
+}
+</script>
+
 <template>
   <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
+    Hello WeScale !
   </div>
 </template>

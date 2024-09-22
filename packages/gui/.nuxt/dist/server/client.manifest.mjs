@@ -1,1 +1,0 @@
-export { default } from "file:///Users/melkouhen/wescale/api-sst/packages/gui/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

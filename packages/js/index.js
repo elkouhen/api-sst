@@ -19,7 +19,7 @@ export const books_list = async (event, context) => {
 
 export const book_get = async (event, context) => {
 
-  return { "body": JSON.stringify({ "name": "starwars4" }) };
+  return { "body": JSON.stringify({ "name": "starwars" }) };
 };
 
 export const book_create = async (event, context) => {
