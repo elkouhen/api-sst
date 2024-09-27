@@ -42,5 +42,12 @@ export default $config({
         const bucket = new sst.aws.Bucket("MyBucket");
 
         bucket.subscribe("packages/js/index.books_import");
+
+        const web_bucket = new sst.aws.Bucket("MyBucket");
+
+        new sst.aws.Nuxt("MyWeb", {
+            link: [bucket],
+            path: "packages/gui"
+        });
     },
 });

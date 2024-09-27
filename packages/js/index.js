@@ -6,6 +6,7 @@ import { DynamoDBDocumentClient, ScanCommand, PutCommand } from "@aws-sdk/lib-dy
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
 
+
 export const books_list = async (event, context) => {
 
   const command = new ScanCommand({

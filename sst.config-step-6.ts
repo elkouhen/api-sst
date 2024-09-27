@@ -28,7 +28,7 @@ export default $config({
 
         api.route("GET /books",
             {
-                handler: "packages/js/index-step-3.books_list",
+                handler: "packages/js/index.books_list",
                 link: [table]
             },
             {
