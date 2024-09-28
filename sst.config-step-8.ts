@@ -24,7 +24,14 @@ export default $config({
             }
         });
 
-        const api = new sst.aws.ApiGatewayV1("MyBookstore");
+        const api = new sst.aws.ApiGatewayV1("MyBookstore",{
+            domain: {
+              name: "api.elkouhen.fyi",
+              dns: sst.aws.dns({
+                zone: "Z02521192K6GG1EW6CPZA"
+              })
+            }
+          })
 
         api.route("GET /books",
             {
@@ -47,7 +54,13 @@ export default $config({
 
         new sst.aws.Nuxt("MyWeb", {
             link: [bucket],
-            path: "packages/gui"
+            path: "packages/gui", 
+            domain: {
+                name: "app.elkouhen.fyi",
+                dns: sst.aws.dns({
+                  zone: "Z02521192K6GG1EW6CPZA"
+                })
+              }
         });
     },
 });

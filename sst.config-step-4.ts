@@ -32,7 +32,6 @@ export default $config({
                 link: [table]
             });
 
-
         api.deploy();
     },
 });

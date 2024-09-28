@@ -17,5 +17,13 @@ declare module "sst" {
       "name": string
       "type": "sst.aws.Dynamo"
     }
+    "MyWeb": {
+      "type": "sst.aws.Nuxt"
+      "url": string
+    }
+    "MyWebBucket": {
+      "name": string
+      "type": "sst.aws.Bucket"
+    }
   }
 }

@@ -7,7 +7,8 @@ async function addTodo() {
 </script>
 
 <template>
-  <div>
+  <img src="https://www.wescale.fr/hubfs/markentive/assets/images/wescale-logo-degrade.svg"/>
+  <h1>
     Hello WeScale !
-  </div>
+  </h1>
 </template>
