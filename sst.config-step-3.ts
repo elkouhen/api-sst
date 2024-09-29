@@ -25,7 +25,7 @@ export default $config({
     });
 
     const mybooklist_function = new sst.aws.Function("MyBookListFunction", {
-      handler: "packages/js/index.books_list_3",
+      handler: "packages/js/index-step-3.books_list",
       runtime: "nodejs20.x",
       timeout: "900 seconds",
       link: [table]

@@ -11,6 +11,7 @@ export default $config({
     },
     async run() {
 
+        console.log($app);
         // table dynamodb pour le stockage des livres
         const table = new sst.aws.Dynamo("MyTable", {
             fields: {
@@ -26,7 +27,7 @@ export default $config({
 
         const api = new sst.aws.ApiGatewayV1("MyBookstore",{
             domain: {
-              name: "api.elkouhen.fyi",
+              name: `api-${$app.stage}.elkouhen.fyi`,
               dns: sst.aws.dns({
                 zone: "Z02521192K6GG1EW6CPZA"
               })
@@ -35,9 +36,7 @@ export default $config({
 
         api.route("GET /books",
             {
-                handler: "packages/python/main.handler",
-                runtime: "python3.11",
-                // dev: false,
+                handler: "packages/js/index.books_list",
                 link: [table]
             },
             {
@@ -55,10 +54,10 @@ export default $config({
         const web_bucket = new sst.aws.Bucket("MyWebBucket");
 
         new sst.aws.Nuxt("MyWeb", {
-            link: [bucket],
+            link: [web_bucket],
             path: "packages/gui", 
             domain: {
-                name: "app.elkouhen.fyi",
+                name: `app-${$app.stage}.elkouhen.fyi`,
                 dns: sst.aws.dns({
                   zone: "Z02521192K6GG1EW6CPZA"
                 })
