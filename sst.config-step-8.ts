@@ -25,6 +25,12 @@ export default $config({
             }
         });
 
+        const userPool = new sst.aws.CognitoUserPool("My", {
+          usernames: ["email"]
+        });
+
+        userPool.addClient("Web")
+
         const api = new sst.aws.ApiGatewayV1("MyBookstore",{
             domain: {
               name: `api-${$app.stage}.elkouhen.fyi`,
@@ -34,6 +40,11 @@ export default $config({
             }
           })
 
+            const myAuthorizer = api.addAuthorizer ({
+      name: "MyAuthorizer",
+      userPools: [userPool.arn],
+    });
+
         api.route("GET /books",
             {
                 handler: "packages/js/index.books_list",
@@ -41,8 +52,11 @@ export default $config({
             },
             {
                 auth: {
-                    iam: true
-                }
+          cognito: {
+            authorizer: myAuthorizer.id,
+            scopes: ["email"],
+          }
+        }
             });
 
         api.deploy();
